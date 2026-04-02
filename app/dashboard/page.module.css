@@ -1,0 +1,55 @@
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.email {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.signOutButton {
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.signOutButton:hover {
+  background: #f5f5f5;
+}
+
+.main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.placeholder {
+  color: #999;
+  text-align: center;
+  margin-top: 4rem;
+}
