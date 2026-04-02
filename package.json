@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.101.1",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.35"
+    "resend": "^6.10.0",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
+    "@types/web-push": "^3.6.4",
     "eslint": "^8",
     "eslint-config-next": "14.2.35"
   }
