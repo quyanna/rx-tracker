@@ -5,6 +5,9 @@ import styles from './page.module.css'
 export default function MedicationForm({ medication, onSubmit, onCancel }) {
   const isEditing = !!medication
 
+  const today = new Date()
+  const maxDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+
   return (
     <div className={styles.formCard}>
       <h3 className={styles.formTitle}>
@@ -60,6 +63,7 @@ export default function MedicationForm({ medication, onSubmit, onCancel }) {
             name="last_fill_date"
             type="date"
             required
+            max={maxDate}
             defaultValue={medication?.last_fill_date}
           />
         </div>

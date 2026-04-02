@@ -38,6 +38,21 @@ export async function updateMedication(formData) {
   revalidatePath('/dashboard')
 }
 
+export async function markFilled(formData) {
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const today = new Date().toISOString().split('T')[0]
+
+  await supabase
+    .from('medications')
+    .update({ last_fill_date: today })
+    .eq('id', formData.get('id'))
+    .eq('user_id', user.id)
+
+  revalidatePath('/dashboard')
+}
+
 export async function deleteMedication(formData) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()

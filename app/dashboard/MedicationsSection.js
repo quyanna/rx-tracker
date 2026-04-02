@@ -33,6 +33,7 @@ export default function MedicationsSection({
   addMedication,
   updateMedication,
   deleteMedication,
+  markFilled,
 }) {
   const [showForm, setShowForm] = useState(false)
   const [editingMed, setEditingMed] = useState(null)
@@ -127,6 +128,12 @@ export default function MedicationsSection({
                 >
                   Edit
                 </button>
+                <form action={markFilled}>
+                  <input type="hidden" name="id" value={med.id} />
+                  <button className={styles.filledButton} type="submit">
+                    Just filled!
+                  </button>
+                </form>
                 <form
                   action={deleteMedication}
                   onSubmit={(e) => {

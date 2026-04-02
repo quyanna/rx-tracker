@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { signOut } from '@/app/auth/actions'
-import { addMedication, updateMedication, deleteMedication } from '@/app/medications/actions'
+import { addMedication, updateMedication, deleteMedication, markFilled } from '@/app/medications/actions'
 import MedicationsSection from './MedicationsSection'
 import styles from './page.module.css'
 
@@ -33,6 +33,7 @@ export default async function DashboardPage() {
           addMedication={addMedication}
           updateMedication={updateMedication}
           deleteMedication={deleteMedication}
+          markFilled={markFilled}
         />
       </main>
     </div>
