@@ -1,10 +1,17 @@
 import { createClient } from '@/lib/supabase/server'
 import { signOut } from '@/app/auth/actions'
+import { addMedication, updateMedication, deleteMedication } from '@/app/medications/actions'
+import MedicationsSection from './MedicationsSection'
 import styles from './page.module.css'
 
 export default async function DashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
+
+  const { data: medications } = await supabase
+    .from('medications')
+    .select('*')
+    .order('name')
 
   return (
     <div className={styles.page}>
@@ -21,9 +28,12 @@ export default async function DashboardPage() {
       </header>
 
       <main className={styles.main}>
-        <p className={styles.placeholder}>
-          Your medications will appear here. (Coming in Stage 3)
-        </p>
+        <MedicationsSection
+          medications={medications ?? []}
+          addMedication={addMedication}
+          updateMedication={updateMedication}
+          deleteMedication={deleteMedication}
+        />
       </main>
     </div>
   )
