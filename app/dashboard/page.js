@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { signOut } from '@/app/auth/actions'
 import { addMedication, updateMedication, deleteMedication, markFilled } from '@/app/medications/actions'
 import MedicationsSection from './MedicationsSection'
+import NotificationToggle from './NotificationToggle'
 import styles from './page.module.css'
 
 export default async function DashboardPage() {
@@ -19,6 +20,7 @@ export default async function DashboardPage() {
         <h1 className={styles.title}>Rx Tracker</h1>
         <div className={styles.headerRight}>
           <span className={styles.email}>{user.email}</span>
+          <NotificationToggle />
           <form action={signOut}>
             <button className={styles.signOutButton} type="submit">
               Sign out
