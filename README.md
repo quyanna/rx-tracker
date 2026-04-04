@@ -72,5 +72,3 @@ Returns `{ processed, pushSent, emailSent, errors }`.
 ## Deployment
 
 Deployed to Vercel. The cron job is configured in `vercel.json` and runs automatically at 09:00 UTC daily. All environment variables must be set in the Vercel project settings.
-
-> **Note:** Resend's `onboarding@resend.dev` sender only delivers to the account owner's email. To send to any address, verify a custom domain in the Resend dashboard and set `RESEND_FROM_EMAIL` accordingly.

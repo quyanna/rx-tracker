@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Pencil, Trash2, Check, Plus } from 'lucide-react'
 import MedicationForm from './MedicationForm'
 import styles from './page.module.css'
 
@@ -66,7 +67,7 @@ export default function MedicationsSection({
             className={styles.addButton}
             onClick={() => setShowForm(true)}
           >
-            + Add medication
+            <Plus size={14} strokeWidth={2} /> Add medication
           </button>
         )}
       </div>
@@ -126,12 +127,12 @@ export default function MedicationsSection({
                   className={styles.editButton}
                   onClick={() => handleEdit(med)}
                 >
-                  Edit
+                  <Pencil size={14} strokeWidth={2} /> Edit
                 </button>
                 <form action={markFilled}>
                   <input type="hidden" name="id" value={med.id} />
                   <button className={styles.filledButton} type="submit">
-                    Just filled!
+                    <Check size={14} strokeWidth={2} /> Just filled!
                   </button>
                 </form>
                 <form
@@ -142,7 +143,7 @@ export default function MedicationsSection({
                 >
                   <input type="hidden" name="id" value={med.id} />
                   <button className={styles.deleteButton} type="submit">
-                    Delete
+                    <Trash2 size={14} strokeWidth={2} /> Delete
                   </button>
                 </form>
               </div>

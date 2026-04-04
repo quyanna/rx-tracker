@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Bell, BellOff } from 'lucide-react'
 import { saveSubscription, deleteSubscription } from '@/app/notifications/actions'
 import styles from './page.module.css'
 
@@ -82,13 +83,13 @@ export default function NotificationToggle() {
   if (status === 'subscribed') {
     return (
       <button className={styles.notifyButtonOn} onClick={handleDisable}>
-        Notifications on
+        <Bell size={14} strokeWidth={2} /> Notifications on
       </button>
     )
   }
   return (
     <button className={styles.notifyButton} onClick={handleEnable}>
-      Enable notifications
+      <BellOff size={14} strokeWidth={2} /> Enable notifications
     </button>
   )
 }

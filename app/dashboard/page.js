@@ -3,6 +3,7 @@ import { signOut } from '@/app/auth/actions'
 import { addMedication, updateMedication, deleteMedication, markFilled } from '@/app/medications/actions'
 import MedicationsSection from './MedicationsSection'
 import NotificationToggle from './NotificationToggle'
+import { LogOut } from 'lucide-react'
 import styles from './page.module.css'
 
 export default async function DashboardPage() {
@@ -23,6 +24,7 @@ export default async function DashboardPage() {
           <NotificationToggle />
           <form action={signOut}>
             <button className={styles.signOutButton} type="submit">
+              <LogOut size={14} strokeWidth={2} />
               Sign out
             </button>
           </form>

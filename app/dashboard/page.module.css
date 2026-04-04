@@ -30,16 +30,20 @@
 }
 
 .signOutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   padding: 0.375rem 0.75rem;
   background: transparent;
-  border: 1px solid #ccc;
+  border: 1px solid #fca5a5;
   border-radius: 4px;
   font-size: 0.875rem;
+  color: #b91c1c;
   cursor: pointer;
 }
 
 .signOutButton:hover {
-  background: #f5f5f5;
+  background: #fef2f2;
 }
 
 .main {
@@ -70,6 +74,9 @@
 }
 
 .addButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   padding: 0.5rem 1rem;
   background: #0070f3;
   color: white;
@@ -157,9 +164,13 @@
   display: flex;
   gap: 0.5rem;
   margin-top: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .editButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   padding: 0.3rem 0.75rem;
   background: transparent;
   border: 1px solid #ccc;
@@ -173,6 +184,9 @@
 }
 
 .deleteButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   padding: 0.3rem 0.75rem;
   background: transparent;
   border: 1px solid #fca5a5;
@@ -187,6 +201,9 @@
 }
 
 .filledButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   padding: 0.3rem 0.75rem;
   background: transparent;
   border: 1px solid #86efac;
@@ -202,6 +219,9 @@
 /* ── Notification toggle ──────────────────────────────────── */
 
 .notifyButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   padding: 0.375rem 0.75rem;
   background: transparent;
   border: 1px solid #ccc;
@@ -215,6 +235,9 @@
 }
 
 .notifyButtonOn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
   padding: 0.375rem 0.75rem;
   background: transparent;
   border: 1px solid #86efac;
@@ -291,6 +314,16 @@
 @media (max-width: 480px) {
   .formRow {
     grid-template-columns: 1fr;
+  }
+  .header {
+    padding: 0.75rem 1rem;
+  }
+  .email {
+    display: none;
+  }
+  .main {
+    padding: 0 1rem;
+    margin: 1.25rem auto;
   }
 }
 

@@ -12,9 +12,15 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata = {
-  title: "Rx Tracker",
-  description: "Medication refill tracker",
+  title: 'Rx Tracker',
+  description: 'Medication refill tracker',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({ children }) {
