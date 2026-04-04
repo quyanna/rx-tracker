@@ -48,10 +48,10 @@ export async function GET(request) {
     return new Response(JSON.stringify({ processed: 0 }), { status: 200 })
   }
 
-  // 2. Filter to medications due within their notify window
+  // 2. Filter to medications due within their notify window or overdue
   const due = medications.filter((med) => {
     const days = getDaysUntilRefill(med.last_fill_date, med.interval_days)
-    return days >= 0 && days <= med.notify_days_before
+    return days <= med.notify_days_before
   })
 
   if (due.length === 0) {
@@ -68,15 +68,17 @@ export async function GET(request) {
 
   const emailMap = new Map(users.map((u) => [u.id, u.email]))
 
-  // 4. Send notifications
+  // 4. Send per-medication push notifications
   let pushSent = 0, emailSent = 0, errors = 0
 
   for (const med of due) {
-    const userEmail = emailMap.get(med.user_id)
     const daysUntilRefill = getDaysUntilRefill(med.last_fill_date, med.interval_days)
-    const title = 'Refill Reminder'
-    const dayLabel = daysUntilRefill === 1 ? '1 day' : `${daysUntilRefill} days`
-    const body = `${med.name} is due for a refill in ${dayLabel}.`
+    const isOverdue = daysUntilRefill < 0
+    const abs = Math.abs(daysUntilRefill)
+    const title = isOverdue ? 'Refill Overdue' : 'Refill Reminder'
+    const body = isOverdue
+      ? `${med.name} is overdue for a refill by ${abs} ${abs === 1 ? 'day' : 'days'}.`
+      : `${med.name} is due for a refill in ${daysUntilRefill === 1 ? '1 day' : `${daysUntilRefill} days`}.`
 
     try {
       const result = await sendPushToUser(supabase, med.user_id, title, body)
@@ -85,15 +87,27 @@ export async function GET(request) {
       console.error(`Push error for user ${med.user_id}, med ${med.id}:`, err.message)
       errors++
     }
+  }
 
-    if (userEmail) {
-      try {
-        const result = await sendReminderEmail(userEmail, med.name, daysUntilRefill)
-        emailSent += result.sent
-      } catch (err) {
-        console.error(`Email error for user ${med.user_id}, med ${med.id}:`, err.message)
-        errors++
-      }
+  // 5. Send one digest email per user
+  const medsByUser = new Map()
+  for (const med of due) {
+    if (!medsByUser.has(med.user_id)) medsByUser.set(med.user_id, [])
+    medsByUser.get(med.user_id).push({
+      name: med.name,
+      daysUntilRefill: getDaysUntilRefill(med.last_fill_date, med.interval_days),
+    })
+  }
+
+  for (const [userId, meds] of medsByUser) {
+    const userEmail = emailMap.get(userId)
+    if (!userEmail) continue
+    try {
+      const result = await sendReminderEmail(userEmail, meds)
+      emailSent += result.sent
+    } catch (err) {
+      console.error(`Email error for user ${userId}:`, err.message)
+      errors++
     }
   }
 
