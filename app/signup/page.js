@@ -44,6 +44,9 @@ export default function SignupPage({ searchParams }) {
         <p className={styles.footer}>
           Already have an account? <Link href="/login">Sign in</Link>
         </p>
+        <p className={styles.footer}>
+          <Link href="/">&larr; Back to home</Link>
+        </p>
       </div>
     </div>
   )
