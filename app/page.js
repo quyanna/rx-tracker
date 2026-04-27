@@ -47,7 +47,7 @@ export default function Home() {
             <span className={styles.featureIcon}>✅</span>
             <h3 className={styles.featureTitle}>One tap to log</h3>
             <p className={styles.featureDesc}>
-              Hit "Just filled!" when you pick up a prescription and your
+              Hit &ldquo;Just filled!&rdquo; when you pick up a prescription and your
               countdown resets automatically.
             </p>
           </div>
